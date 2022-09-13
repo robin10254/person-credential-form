@@ -10,37 +10,39 @@ const getLocalStorage = () => {
     }
 };
 
-const Form = () =>{
+const FormView = () =>{
     const [ list, setList] = useState(getLocalStorage());
-    const [ person, setPerson] = useState({ firstName: "", middleName: "", lastName: "", age: null, contactNumber: "", email: "", status: ""});
+    let [ person, setPerson] = useState({ id: null, firstName: "", middleName: "", lastName: "", age: null, contactNumber: "", email: "", status: ""});
 
     useEffect(()=>{
-        localStorage.setItem("list", JSON.stringify(list))}, [list]);
+        localStorage.setItem("list", JSON.stringify(list))}, [list]
+    );
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-        
-    //     if( !name ){
-    //       //just skip this
-    //     }else if( name && isEditing ){
-    //       setList(
-    //         list.map((item) => {
-    //           if( item.id === editId ){
-    //             return { ...item, title: name}
-    //           }
-    //           return item
-    //         })
-    //       );
-    //       setName("");
-    //       setEditId(null);
-    //       setIdEditing(false);
-    //     } else{
-    //       let makeId = list.length + 1;
-    //       let newItem = { id: makeId, title: name, status: false};
-    //       setList([...list, newItem]);
-    //       setName("");
-    //     }
-    // };
+    const validInputCheck = ()=>{
+        if( person.firstName === "" ){
+            alert("Your first name is not entered.");
+            return false;
+        }else if( person.middleName === "" ){
+            alert("Your middle name is not entered.");
+            return false;
+        }else if( person.lastName === "" ){
+            alert("Your last name is not entered.");
+            return false;
+        }else if( person.age < 0 || 151 < person.age || person.age === null ){
+            alert("Your age is not correct.");
+            return false;
+        }else if( person.contactNumber.length !== 11 ){
+            alert("Your contact number is not correct.");
+            return false;
+        }else if( person.email === "" ){
+            alert("Your email address is not entered.");
+            return false;
+        }else if( person.status === "" ){
+            alert("Your status is not selected.");
+            return false;
+        }
+        return true;
+    }
 
     const onChangeHandler = (e) => {
         const val = e.target.value;
@@ -72,8 +74,12 @@ const Form = () =>{
         }
     };
     const submitHanlder = () => {
+        if( validInputCheck() === false ) return;
+
+        let makeId = list.length + 1;
+        person = { ...person, id: makeId};
         setList([ ...list, person]);
-        alert( person.firstName + " " + person.middleName + " " + person.lastName + ", " + person.email + ", " + person.age + ", " + person.contactNumber + ", " + person.status );
+        alert("Your information saved.");
     };
 
     return (
@@ -89,6 +95,7 @@ const Form = () =>{
                             <input 
                                 type='text'
                                 name='firstName'
+                                autoComplete='off'
                                 value={person.firstName}
                                 onChange={onChangeHandler}
                                 className='form-control'
@@ -102,6 +109,7 @@ const Form = () =>{
                             <input 
                                 type='text'
                                 name='middleName'
+                                autoComplete='off'
                                 value={person.middleName}
                                 onChange={onChangeHandler}
                                 className='form-control'
@@ -115,6 +123,7 @@ const Form = () =>{
                             <input 
                                 type='text'
                                 name='lastName'
+                                autoComplete='off'
                                 value={person.lastName}
                                 onChange={onChangeHandler}
                                 className='form-control'
@@ -128,6 +137,7 @@ const Form = () =>{
                             <input 
                                 type='number'
                                 name='age'
+                                autoComplete='off'
                                 value={person.age}
                                 onChange={onChangeHandler}
                                 className='form-control'
@@ -144,6 +154,7 @@ const Form = () =>{
                             <input 
                                 type='tel'
                                 name='contactNumber'
+                                autoComplete='off'
                                 value={person.contactNumber}
                                 onChange={onChangeHandler}
                                 className='form-control'
@@ -194,8 +205,8 @@ const Form = () =>{
                             onClick={submitHanlder}
                         >Save</button>
                     </div>
-                    <div className='card shadow-lg p-3 mb-5 bg-white rounded'>
-                        {list.length > 0 && (<ListView items={list}/>)}
+                    <div>
+                        {list.length > 0 && (<ListView list={list} setList={setList} person={person} setPerson={setPerson}/>)}
                     </div>
                 </div>
             </div>
@@ -203,4 +214,4 @@ const Form = () =>{
     );
 }
 
-export default Form;
+export default FormView;

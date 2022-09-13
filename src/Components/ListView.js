@@ -1,23 +1,26 @@
 import React from 'react';
+import EditDeleteView from './EditDeleteView';
 
-const ListView = ( items )=>{
+const ListView = ( {list, setList, person, setPerson} )=>{
     return (
-        <div>
-            <h1 className='text-center'>Person Credential List</h1>
-            {/* { items.map(( item ) => {
-                const { firstName, middleName, lastName, age, contactNumber, email, status} = item;
+        <div className='card shadow-lg p-3 mb-5 bg-white rounded'>
+            <h3 className='card shadow-lg p-3 mb-5 bg-white rounded text-center'>Person Credential List</h3>
+            { list.map(( item ) => {
+                const { id, firstName, middleName, lastName, age, contactNumber, email, status} = item;
+
                 return(
-                    <div className='list-item'>
-                        <p>{firstName}</p>
-                        <p>{middleName}</p>
-                        <p>{lastName}</p>
-                        <p>{age}</p>
-                        <p>{contactNumber}</p>
-                        <p>{email}</p>
-                        <p>{status}</p>
+                    <div>
+                        <div className='card shadow-lg p-3 mb-5 bg-white rounded'>
+                            <p> Full Name: {firstName} {middleName} {lastName}</p>
+                            <p>Age: {age}</p>
+                            <p>Contact Number: {contactNumber}</p>
+                            <p>Email Address: {email}</p>
+                            <p>Status: {status}</p>
+                            <EditDeleteView list={list} setList={setList} id={id} />
+                        </div>
                     </div>
                 );
-            })} */}
+            })}
         </div>
     );
 };
