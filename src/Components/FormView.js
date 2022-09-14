@@ -58,18 +58,27 @@ const FormView = () =>{
 
     const submitHanlder = () => {
         if( validInputCheck() === false ) return;
-        // if( isEditing ){
-        //     alert( editId );
-        //     setEditId( null );
-        //     isEditing( false );
-        // }else{
-            
-        // }
-        let makeId = list.length + 1;
-        person = { ...person, id: makeId};
-        setList([ ...list, person]);
-        alert("Your information saved.");
-        setPerson({firstName: "", middleName: "", lastName: "", age: "", contactNumber: "", email: "", status: ""});
+        if( isEditing ){
+            setList(
+                list.map((item) => {
+                  if( item.id === editId ){
+                    item = { ...item, id: person.id, firstName: person.firstName, middleName: person.middleName, lastName: person.lastName, age: person.age, contactNumber: person.contactNumber, email: person.email, status: person.status};
+                    setList([ ...list, item]);
+                    alert("Your information updated.");
+                    setPerson({firstName: "", middleName: "", lastName: "", age: "", contactNumber: "", email: "", status: ""});
+                  }
+                  return item;
+                })
+            );
+            setEditId( null );
+            isEditing( false );
+        }else{
+            let makeId = list.length + 1;
+            person = { ...person, id: makeId};
+            setList([ ...list, person]);
+            alert("Your information saved.");
+            setPerson({firstName: "", middleName: "", lastName: "", age: "", contactNumber: "", email: "", status: ""});
+        }
     };
 
     return (

@@ -11,12 +11,11 @@ const ListView = ()=>{
         <div className='card shadow-lg p-3 mb-5 bg-white rounded'>
             <h3 className='card shadow-lg p-3 mb-5 bg-white rounded text-center'>Person Credential List</h3>
             { list.map(( item ) => {
-                const {id, firstName, middleName, lastName, age, contactNumber, email, status} = item;
+                const {firstName, middleName, lastName, age, contactNumber, email, status} = item;
 
                 return(
                     <div>
                         <div className='card shadow-lg p-3 mb-5 bg-white rounded'>
-                            <h3>ID: {id}</h3>
                             <p> Full Name: {firstName} {middleName} {lastName}</p>
                             <p>Age: {age}</p>
                             <p>Contact Number: {contactNumber}</p>
