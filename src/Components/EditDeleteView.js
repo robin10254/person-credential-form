@@ -1,34 +1,25 @@
-import React from 'react';
+import { useContext } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
-const EditDeleteView = ( {list, setList, id } ) => {
-    // const [ isEditing, setIdEditing] = useState(false);
-    // const [ editId, setEditId] = useState(null);
+import { UserContext } from './FormView';
 
-    // const handleSubmit = (id) => {
-    //     e.preventDefault();
-        
-    //     if( id && isEditing ){
-    //       setList(
-    //         list.map((item) => {
-    //           if( item.id === editId ){
-    //             return { ...item, firstName: firstName}
-    //           }
-    //           return item
-    //         })
-    //       );
-    //       setName("");
-    //       setEditId(null);
-    //       setIdEditing(false);
-    //     }
-    // };
-    // const editItem = () => {
-    //     const editItem = list.find((item) => item.id === id );
-    //     setIdEditing( true );
-    //     setEditId( id );
-    //     handleSubmit(id);
-    //     // setName( editItem.title );
-    // };
+const EditDeleteView = ( {item} ) => {
+    const {list, setList, setPerson, setIdEditing, setEditId} = useContext(UserContext);
+    const { id, firstName, middleName, lastName, age, contactNumber, email, status} = item;
+
+    const editItem = () => {
+        // const editItem = list.find((item) => item.id === id );
+        setIdEditing( true );
+        setEditId( id );
+        setPerson({ ...item, id: id});
+        setPerson({ ...item, firstName: firstName});
+        setPerson({ ...item, middleName: middleName});
+        setPerson({ ...item, lastName: lastName});
+        setPerson({ ...item, age: age});
+        setPerson({ ...item, contactNumber: contactNumber});
+        setPerson({ ...item, email: email});
+        setPerson({ ...item, status: status});
+    };
 
     const removeItem = () => {
         setList( list.filter( (item) => item.id !== id ));
@@ -39,7 +30,8 @@ const EditDeleteView = ( {list, setList, id } ) => {
         <div>
             <button 
                 type="button" 
-                className='edit-btn'>
+                className='edit-btn'
+                onClick={()=>editItem()}>
                 <FaEdit />
             </button>
             <button 
