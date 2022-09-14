@@ -30,13 +30,13 @@ const EditDeleteView = ( {item} ) => {
         <div>
             <button 
                 type="button" 
-                className='edit-btn'
+                className='edit-btn margin-right'
                 onClick={()=>editItem()}>
                 <FaEdit />
             </button>
             <button 
                 type="button" 
-                className='delete-btn'
+                className='delete-btn margin-right'
                 onClick={()=>removeItem()}
                 >
                 <FaTrash />

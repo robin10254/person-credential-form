@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 
 import ListView from './ListView';
+import SearchListView from './SearchListView';
 
 export const UserContext = createContext();
 
@@ -18,6 +19,7 @@ const FormView = () =>{
     let [ person, setPerson] = useState({ id: null, firstName: "", middleName: "", lastName: "", age: null, contactNumber: "", email: "", status: ""});
     const [ isEditing, setIdEditing] = useState(false);
     const [ editId, setEditId] = useState(null);
+    const [ searchItem, setSearchItem] = useState("");
     
     useEffect(()=>{
         localStorage.setItem("list", JSON.stringify(list))}, [list]
@@ -82,7 +84,7 @@ const FormView = () =>{
     };
 
     return (
-        <UserContext.Provider value={{list, setList, person, setPerson, isEditing, setIdEditing, editId, setEditId}}>
+        <UserContext.Provider value={{list, setList, person, setPerson, isEditing, setIdEditing, editId, setEditId, searchItem, setSearchItem}}>
             <div className='container'>
                 <div className='row justify-content-center pt-5'>
                     <div className='flex col-md-5'>
@@ -204,6 +206,9 @@ const FormView = () =>{
                                 className='btn btn-primary btn-block'
                                 onClick={submitHanlder}
                             >Save</button>
+                        </div>
+                        <div>
+                            <SearchListView/>
                         </div>
                         <div>
                             {list.length > 0 && (<ListView/>)}
