@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import ListView from './ListView';
+import Navbar from './Navbar';
 import SearchListView from './SearchListView';
 
 export const UserContext = createContext();
@@ -207,12 +209,17 @@ const FormView = () =>{
                                 onClick={submitHanlder}
                             >Save</button>
                         </div>
-                        <div>
-                            <SearchListView/>
-                        </div>
-                        <div>
-                            {list.length > 0 && (<ListView/>)}
-                        </div>
+                        <Router>
+                            <Navbar/>
+                            <Routes>
+                                <Route/>
+                                <Route exact path='/searchlistview' element={<SearchListView/>}/>
+                                <Route exact path='/listview' element={<ListView/>}/>
+
+                            </Routes>
+                            {/* <SearchListView/>
+                            {list.length > 0 && (<ListView/>)} */}
+                        </Router>
                     </div>
                 </div>
             </div>

@@ -71,6 +71,12 @@ code {
 .inActive {
   background-color: rgb(255, 133, 133);
 }
+.navbar {
+  text-transform: uppercase;
+  text-decoration: none;
+  /* margin: 0 2rem; */
+  background-color: transparent;
+}
 
 @keyframes App-logo-spin {
   from {
