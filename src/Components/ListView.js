@@ -22,13 +22,14 @@ const ListView = ()=>{
 
     return (
         <div className='card shadow-lg p-3 mb-5 bg-white rounded'>
-            <h3 className='card shadow-lg p-3 mb-5 bg-white rounded text-center'>Person Credential List</h3>
-            { list.map(( item ) => {
+            <h3 className='card shadow-lg p-3 mb-5 bg-white rounded text-center'>Person Credentials List</h3>
+            { ( list.length ) ? list.map(( item ) => {
                 const {id, firstName, middleName, lastName, age, contactNumber, email, status} = item;
 
                 return(
                     <div>
                         <div className='card shadow-lg p-3 mb-5 bg-white rounded'>
+                            alert("List exist");
                             <p>Full Name: {firstName} {middleName} {lastName}</p>
                             <p>Age: {age}</p>
                             <p>Contact Number: {contactNumber}</p>
@@ -51,7 +52,13 @@ const ListView = ()=>{
                         </div>
                     </div>
                 );
-            })}
+                }) : (() => {
+                return(
+                    <div>
+                        <h6 style={{textAlign: 'center'}}>List is empty. Add person's credentials.</h6>
+                    </div>
+                );})()
+            }
         </div>
     );
 };
