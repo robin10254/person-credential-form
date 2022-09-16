@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 import { UserContext } from './FormView';
 
@@ -57,8 +58,9 @@ const EditDeleteView = ( {item} ) => {
             <button 
                 type="button" 
                 className='edit-btn margin-right'
-                onClick={()=>editItem()}>
-                <FaEdit />
+                onClick={()=>editItem()}
+                >
+                <Link className='edit-btn' to='/createperson'><FaEdit /></Link>
             </button>
             <button 
                 type="button" 
