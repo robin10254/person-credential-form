@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <nav className="flex-row navbar">
+        <nav className="flex-row navbar" style={{width: '40rem'}}>
                 <div className="margin-right card shadow-lg p-3 mb-5 bg-white rounded">
                     <Link style={{textDecoration: 'none'}} to='/createperson'>
                         <text>Create Person</text>

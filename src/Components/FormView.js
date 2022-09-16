@@ -23,7 +23,22 @@ const FormView = () =>{
     const [ isEditing, setIdEditing] = useState(false);
     const [ editId, setEditId] = useState(null);
     const [ searchItem, setSearchItem] = useState("");
+    const [ countId, setCountId] = useState(0);
+    const colName = [ 'First Name', 'Middle Name', 'Last Name', 'Age', 'Contact Number', 'Email', 'Status'];
+    const [ isPrinted, setIsPrinted ] = useState(false);
     
+    // const dummyData = () => {
+    //     //Dummy data 1
+    //     person = { id: 1000, firstName: "Md. Rifat", middleName: "Islam", lastName: "Robin", age: 26, contactNumber: "01780944849", email: "rifatrobin810@gmail.com", status: "Online"}
+    //     // setList([ ...list, person]);
+
+    //     //Dummy data 2
+    //     person = { ...person, id: 1001, firstName: "Md. Rishad", middleName: "Zaman", lastName: "Rafi", age: 26, contactNumber: "01756780987", email: "zamanrafi007@gmail.com", status: "Offline"}
+    //     // setList([ ...list, person]);
+    //     // console.log(list);
+    // }
+    // dummyData();
+
     useEffect(()=>{
         localStorage.setItem("list", JSON.stringify(list))}, [list]
     );
@@ -78,8 +93,9 @@ const FormView = () =>{
             setEditId( null );
             isEditing( false );
         }else{
-            let makeId = list.length + 1;
-            person = { ...person, id: makeId};
+            setCountId( countId + 1 );
+            person = { ...person, id: countId};
+            
             setList([ ...list, person]);
             alert("Your information saved.");
             setPerson({firstName: "", middleName: "", lastName: "", age: "", contactNumber: "", email: "", status: ""});
@@ -87,10 +103,10 @@ const FormView = () =>{
     };
 
     return (
-        <UserContext.Provider value={{list, setList, person, setPerson, isEditing, setIdEditing, editId, setEditId, searchItem, setSearchItem, onChangeHandler, submitHanlder}}>
+        <UserContext.Provider value={{list, setList, person, setPerson, isEditing, setIdEditing, editId, setEditId, searchItem, setSearchItem, onChangeHandler, submitHanlder, colName, isPrinted, setIsPrinted}}>
             <div className='container'>
-                <div className='row justify-content-center pt-5'>
-                    <div className='flex col-md-5'>
+                <div className='row justify-content-center pt-5' >
+                    <div className='flex col-md-5' style={{width: '50rem'}}>
                         <Router>
                             <Navbar/>
                             <Routes>

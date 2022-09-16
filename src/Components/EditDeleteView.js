@@ -7,6 +7,19 @@ const EditDeleteView = ( {item} ) => {
     const {list, setList, setPerson, setIdEditing, setEditId} = useContext(UserContext);
     const { id, firstName, middleName, lastName, age, contactNumber, email, status} = item;
 
+    const handleChange = ( ID, value ) => {
+        setList(
+            list.map((item) => {
+              if( item.id === ID ){
+                item = { ...item, status: value};
+                setList([ ...list, item]);
+                alert("Your information updated.");
+              }
+              return item;
+            })
+        );
+    }
+
     const editItem = () => {
         // const editItem = list.find((item) => item.id === id );
         setIdEditing( true );
@@ -27,7 +40,20 @@ const EditDeleteView = ( {item} ) => {
 
     return (
 
-        <div>
+        <div style={{flexDirection: 'row'}}>
+            <div className='card' style={{width: '6rem', alignItems: 'center'}}>
+                { ( status === 'Online' ) ? <div className='margin-right'>
+                    <input 
+                        type='checkbox'
+                        onClick={() => {handleChange(id, "Offline")}}
+                    /> Offline
+                </div> : <div className='margin-right'>
+                    <input 
+                        type='checkbox'
+                        onClick={() => {handleChange(id, "Online")}}
+                    /> Online
+                </div>}
+            </div>
             <button 
                 type="button" 
                 className='edit-btn margin-right'
